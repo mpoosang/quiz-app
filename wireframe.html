@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz App</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="app.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header>
+        <h1>Name that Snowboarding Trick!</h1>
+    </header>
+
+    <main class="container">
+    <div class="start-page">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto quod aliquam perspiciatis dolores. Similique, possimus quos totam earum quod, non nostrum recusandae quibusdam iusto sed accusantium optio ex vero quisquam!</p>
+        <form action="">
+            <button type="submit">Start Quiz</button>
+        </form>
+    </div>
+    
+    <div class="quiz-page">
+        <div class="status">
+            <div class="quiz-number">Question 1/10</div>
+            <div class="quiz-score">Score: 0</div>
+        </div>
+        <div class="question">
+            <p>Question 1</p>
+        </div>
+        <form action class="quiz-question">
+            <input name="option-a" type="radio" value="A">
+                <label for="option-a">A</label><br>
+            <input name="option-b" type="radio" value="B">
+                <label for="option-b">B</label><br>
+            <input name="option-c" type="radio" value="C">
+                <label for="option-c">C</label><br>
+            <input name="option-d" type="radio" value="D">
+                <label for="option-d">D</label><br>
+
+            <button type="submit">Submit Answer</button>
+        </form>
+    </div>
+
+    <div class="results-page">
+        <form action="">
+            <div class="final-score">Final Score</div>
+            <div class="final-score-num">10/10</div>
+            <button type="reset">Retake Quiz</button>
+        </form>
+    </div>
+    </main>
+
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+      <script src="app.js"></script>
+</body>
+</html>
+
