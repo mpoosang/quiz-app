@@ -1,6 +1,70 @@
-/* Your styles should be mobile-first and responsive */
-
 /** 
 https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
 */
 
+
+/***** General Styles *****/
+
+* {
+    box-sizing: border-box;
+}
+
+html { 
+    background: url(photos/mountain-snow.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.container {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+body {
+    font-family: ;
+    margin: 0;
+}
+
+header {
+    background-color: gray;
+    text-align: center;
+}
+
+h1 {
+
+}
+
+li {
+    background-color: gray;
+}
+
+
+
+/***** Form *****/
+
+form input[type="radio"] {
+    /* font-size: 16px; */
+    margin-bottom: 20px;
+    /* background-color: gray; */
+}
+
+form input[type="radio"] + label {
+    display: inline;
+    /* color: #000;
+    font-size: 16px; */
+}
+
+
+/***** Groups & Items  (Desktop) *****/
+
+/* When a web browser is larger than 600px,
+   apply these rules */
+   /* @media all and (min-width: 600px) {
+
+   } */
