@@ -104,8 +104,12 @@ function renderQuiz() {
 function checkAnswer() {
     let selectedOption = $("input[name=option]:checked").val();
     let correctAnswer = STORE.questions[STORE.currentNum].correctAnswer;
-    if (selectedOption === correctAnswer) {
+    if (!selectedOption) {
+        alert('Please select an answer.');
+        return;
+    } else if (selectedOption === correctAnswer) {
         STORE.score++;
+        
     }
     showFeedbackHtml();
 }
@@ -115,7 +119,7 @@ function showFeedbackHtml() {
     let correctAnswer = STORE.questions[STORE.currentNum].correctAnswer;
     // correct answer
     if (selectedOption === correctAnswer) {
-        $('main').html(`
+        $('#mainContent').html(`
         <section class="js-quiz-answer">
             <h1 class="correct">Correct!</h1>
             <div class="answer-is">The answer is:</div>
