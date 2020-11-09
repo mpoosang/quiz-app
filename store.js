@@ -1,6 +1,6 @@
-const store = {
+const STORE = {
     questions: [
-      {
+      { // Question 1
         question: 'Name the grab where you grab your heelside edge (between your feet) with your front hand',
         answers: [
           'Mindy',
@@ -10,7 +10,7 @@ const store = {
         ],
         correctAnswer: 'Melon'
       },
-      {
+      { // Question 2
         question: 'Name the jib trick where you pop the tail of your board up and over the feature, landing perpendicular in a sliding position',
         answers: [
           'Michael Jackson',
@@ -20,7 +20,7 @@ const store = {
         ],
         correctAnswer: 'Lipslide'
       },
-      {
+      { // Question 3
         question: 'Name the grab where you grab your heelside edge (between your feet) with your rear hand',
         answers: [
           'Stalefish',
@@ -30,7 +30,7 @@ const store = {
         ],
         correctAnswer: 'Stalefish'
       },
-      {
+      { // Question 4
         question: 'Name the jib trick where you jump all the way across the feature, landing perpendicular on just the tail of your board',
         answers: [
           'Boardslide',
@@ -40,7 +40,7 @@ const store = {
         ],
         correctAnswer: 'Bluntslide'
       },
-      {
+      { // Question 5
         question: 'Name the grab where you reach between your feet with your back hand, through your legs and grab the heel edge of your snowboard',
         answers: [
           'Canadian Bacon',
@@ -50,7 +50,7 @@ const store = {
         ],
         correctAnswer: 'Roast Beef'
       },
-      {
+      { // Question 6
         question: 'Name the jib trick where you pop off a board or lipslide, spinning 270 in the opposite direction you jumped on',
         answers: [
           'Knuckle',
@@ -60,7 +60,7 @@ const store = {
         ],
         correctAnswer: 'Pretzel'
       },
-      {
+      { // Question 7
         question: 'Name the grab where your rear hand grabs your toe edge slightly inside your rear foot',
         answers: [
           'Indy',
@@ -70,7 +70,7 @@ const store = {
         ],
         correctAnswer: 'Indy'
       },
-      {
+      { // Question 8
         question: 'Name the jib trick where you slide straight down the feature, nose first, with weight evenly on both feet',
         answers: [
           'Slide',
@@ -80,7 +80,7 @@ const store = {
         ],
         correctAnswer: '50-50'
       },
-      {
+      { // Question 9
         question: 'Name the grab where you grab the toe edge (preferably in-between the binding) with your front hand and tweak it out behind your back',
         answers: [
           'Japan',
@@ -90,7 +90,7 @@ const store = {
         ],
         correctAnswer: 'Japan'
       },
-      {
+      { // Question 10
         question: 'Name the grab where both of your hands grab the nose, while the rear leg is boned and the front leg is pulled up',
         answers: [
           'Taipan',
@@ -102,8 +102,7 @@ const store = {
       },
     ],
     quizStarted: false,
-    questionNumber: 0,
+    currentNum: 0,
     score: 0
   };
   
-
