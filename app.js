@@ -7,20 +7,39 @@ let currentNum = 0;
 let score = 0;
 
 
+// changes the quiz to true to start the quiz
+function startQuiz() {
+    STORE.quizStarted = true;
+    console.log('The quiz has started');
+}
+
+// changes global variables back to default and quiz to false 
+function retakeQuiz() {
+    STORE.quizStarted = false;
+    STORE.currentNum = 0;
+    STORE.score = 0;
+}
+
+
 /********** TEMPLATE GENERATION FUNCTIONS **********/
 // generates HTML for the start screen
 function generateStartHtml() {
     return `
     <section class="js-start-page">
-    <h2>Test your Freestyle Snowboarding Knowledge</h2>
+    <header>
+        <h1>Name that Snowboarding Trick!</h1>
+    </header>
+    <h2 class="header-test">Test your Freestyle Snowboarding Knowledge</h2>
     <div class="instructions">
-        <h3>Instructions:</h3>
+    <form>
+        <h3 class="rules">Instructions:</h3>
         <ul>
             <li>You will be given 10 multiple choice questions pertaining to different snowboarding grab and jib tricks</li>
             <li>All questions must be answered to complete the quiz</li>
         </ul>
     </div>
-    <button type="submit" id="startQuiz">Start Quiz</button>
+    <button type="button" id="startQuiz" autofocus>Start Quiz</button>
+    </form>
     </section>
     `;
 }
@@ -50,9 +69,9 @@ function generateQuestionHtml() {
             <legend>${currentNum.question}</legend>
         </div>
             <div class="quiz-options">
-                ${generateOptionsHtml()}
-                <button type="submit" id="submit-answer">Submit Answer</button>
+                ${generateOptionsHtml()} <br>
             </div>
+            <button type="submit" id="submit-answer">Submit Answer</button>
         </fieldset>
     </form>
     </section>
@@ -67,22 +86,62 @@ function generateOptionsHtml() {
 
     optionsArray.forEach(option => {
         optionsHtml += `
-        <input type="radio" name="option" id="${i + 1}" value="${option}" required>
-        <label for="option${i + 1}">${option}</label>
+        <div class="wrapper-option">
+            <input type="radio" name="option" id="${i + 1}" value="${option}" tabindex ="${i + 1}" required>
+            <label for="option${i + 1}" class="option">${option}</label>
+        </div> <br>
         `;
         i++;
     });
     return optionsHtml;
 }
 
+// generates HTML for the final results page
+function generateFinalResultsHtml() {
+    return `
+    <section class="js-quiz-results">
+    <form>
+        <img src="photos/snowboarder-yellow.png" class="snowboarder" alt="snowboarder">
+        <h1 class="result-heading">Your Final Score</h1>
+        <div class="scores">
+            <div class="final-score">${STORE.score}</div>
+            <img src="photos/snowboard.png" class="snowboard" alt="snowboard">
+            <div class="final-score">${STORE.questions.length}</div>
+        </div>
+        <div class="results-message">
+            ${generateResultsText()}
+        </div>
+        <br>
+        <button type="button" id="retake" autofocus>Retake Quiz</button>
+    </form>
+    </section>
+    `;
+}
 
+// provides feedback message based on final score
+function generateResultsText() {
+    let score = STORE.score;
+    if (score >= 0 && score <= 3) 
+        return `Do you even snowboard? <br>
+                Why don't you try again`;
+
+    if (score >= 4 && score <=6 )
+        return `You performance was decent <br>
+                But there is still room for improvement`;
+
+    if (score >= 7 && score <=9 )
+        return `You almost got it! <br>
+                Would you like to retake the quiz?`;
+    
+    if (score === 10)
+        return `CONGRATULATIONS! You stomped the landing for a perfect score. <br>`;
+}
 
 
 /********** RENDER FUNCTION(S) **********/
 // this function conditionally replaces the contents of the <main> tag based on the state of the store
 function renderQuiz() {
     let html = '';
-
     if (STORE.quizStarted === false) {
         $('main').html(generateStartHtml());
         return;
@@ -93,75 +152,56 @@ function renderQuiz() {
         $('main').html(html);
     }
     else {
-        $('main').html(generateFinalResultsHtml());
+        html = generateFinalResultsHtml();
+        $('main').html(html);
+        // $('main').html(generateFinalResultsHtml());
     }
 }
 
 
-
-
-
+// checks to see if option selected is the correct answer
 function checkAnswer() {
     let selectedOption = $("input[name=option]:checked").val();
-    let correctAnswer = STORE.questions[STORE.currentNum].correctAnswer;
     if (!selectedOption) {
         alert('Please select an answer.');
         return;
-    } else if (selectedOption === correctAnswer) {
-        STORE.score++;
-        
     }
     showFeedbackHtml();
 }
 
+// generates HTML on whether option selected is correct/incorrect
 function showFeedbackHtml() {
     let selectedOption = $("input[name=option]:checked").val();
     let correctAnswer = STORE.questions[STORE.currentNum].correctAnswer;
     // correct answer
     if (selectedOption === correctAnswer) {
-        $('#mainContent').html(`
+        STORE.score++;
+        $('main').html(`
         <section class="js-quiz-answer">
+        <form>
             <h1 class="correct">Correct!</h1>
-            <div class="answer-is">The answer is:</div>
-			<div>${correctAnswer}</div>
+            <div class="answer-is">The correct answer is:</div>
+			<div class="answer">${correctAnswer}</div>
 			<br>
-			<button type="button" id="continue">Continue</button>
+            <button type="button" id="continue" autofocus>Continue</button>
+        </form>
         </section>
         `);
     // wrong answer
     } else {
         $('main').html(`
         <section class="js-quiz-answer">
+        <form>
             <h1 class="correct">Wrong!</h1>
             <div class="answer-is">The correct answer is:</div>
-			<div>${correctAnswer}</div>
+			<div class="answer">${correctAnswer}</div>
 			<br>
-			<button type="button" id="continue">Continue</button>
+            <button type="button" id="continue" autofocus>Continue</button>
+        </form>
         </section>
         `);
     }
 }
-
-
-
-
-
-
-
-// changes the quiz true to start
-function startQuiz() {
-    STORE.quizStarted = true;
-    console.log('The quiz has started');
-}
-
-// goes to next question
-function nextQuestion(){
-    if (STORE.currentNum < STORE.questions.length) {
-      STORE.currentNum++;
-    } else if (store.currentNum === STORE.questions.length) {
-      STORE.quizStarted = false;
-    }
-  }
 
 
 /********** EVENT HANDLER FUNCTIONS **********/
@@ -177,25 +217,24 @@ function handleSubmitAnswer() {
     $('main').on('click', '#submit-answer', event => {
         event.preventDefault();
         checkAnswer();
+    });
+}
+
+function handleNextQuestion() {
+    $('main').on('click', '#continue', event => {
+        event.preventDefault();      
+        STORE.currentNum++;
         renderQuiz();
     });
 }
 
-// function handleNextQuestion() {
-//     $('main').on('click', '#continue', event => {
-//         event.preventDefault();
-//         nextQuestion();
-//         renderQuiz();
-//     });
-// }
-
-// function handleSeeResults() {
-    
-// }
-
-// function handleRetakeQuiz() {
-    
-// }
+function handleRetakeQuiz() {
+    $('main').on('click', '#retake', event => {
+        event.preventDefault();
+        retakeQuiz();
+        renderQuiz();
+    });
+}
 
 
 // this will be the main callback function when the page loads
@@ -203,9 +242,8 @@ function handleQuizApp() {
     renderQuiz();
     handleStartQuiz();
     handleSubmitAnswer();
-    // handleNextQuestion();
-    // handleSeeResults();
-    // handleRetakeQuiz();
+    handleNextQuestion();
+    handleRetakeQuiz();
 }
 
 // when the page loads, call `handleQuizApp`
