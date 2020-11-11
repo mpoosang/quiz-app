@@ -1,13 +1,9 @@
-/** 
-https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
-*/
-
 
 /***** General Styles *****/
 
 * {
     box-sizing: border-box;
-    /* font-family: ; */
+    font-family: 'Source Serif Pro', serif;
 }
 
 html { 
@@ -20,39 +16,27 @@ html {
 
 .container {
     margin: auto;
-    width: 70%;
+    width: 60%;
     text-align: center;
-    /* display: flex;
+    display: flex;
     align-items: center;
-    justify-content: center; */
+    justify-content: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 body {
-    font-family: ;
     margin: 0;
 }
 
-header {
-    /* background-color: gray; */
-    text-align: center;
-    text-transform: uppercase;
-}
-
-h1 {
-    
-}
-
-/* h3 {
-    text-align: left;
-} */
-
-li {
-    text-align: left;
-}
-
 button {
+    margin: 20px;
     color: #ffffff;
-    background-color: rgba(182, 10, 10);
+    background-color: #b60a0a;
+    border: none;
+    box-shadow: 3px 3px 5px #D3D3D3;
 }
 
 button, input[type="text"] {
@@ -61,15 +45,54 @@ button, input[type="text"] {
 
 button:hover {
     cursor: pointer;
+    background: #FE340B;
+}
+
+button #submit-answer {
+    margin-top: 0;
 }
 
 
+/***** Start Page *****/
+
+header {
+    /* margin-top: 175px; */
+}
+
+header h1 {
+    font-family: 'Lato', sans-serif;
+    font-size: 2em;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.header-test {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 1.5em;
+    border-top: 2px solid #b60a0a;
+    padding-top: 15px;
+}
 
 
+.rules {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    text-align: left;
+}
 
+li {
+    text-align: left;
+    padding-left: 0.5em;
+    text-indent: -1em;
+}
 
 
 /***** Quiz Page *****/
+fieldset {
+    border: 5px solid #FFC600;
+}
+
 .status {
     width: 100%;
     display: flex;
@@ -83,39 +106,123 @@ button:hover {
     font-size: 1.3rem;
     font-weight: 700;
     padding: 25px;
+    margin-bottom: 0.75em;
+}
+
+.option {
+    padding-right: 50px;
 }
 
 .quiz-options {
-    /* display: flex;
-    flex-direction: column; */
-    /* text-align: left; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
 }
-
-
-/***** Form *****/
 
 form input[type="radio"] {
     /* font-size: 16px; */
-    margin-bottom: 20px;
-
+    margin-bottom: 10px;
+    margin-right: 0.8em;
 }
 
-form input[type="radio"] + label {
-    display: inline;
-    padding-right: 1em;
-    /* display: flex;
-    flex-direction: column; */
-    /* color: #000;
-    font-size: 16px; */
+/* form input[type="radio"] + label {
+    padding-right: 2em;
+} */
+
+
+form input[type="radio"]  {
+    + label {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 20px; /* This will be adjusted */
+    
+        &::before {
+          content: '';
+          position: absolute;
+          display: inline-block;
+          left: -24px; /* This will be adjusted */
+          border-radius: 50%;
+          border: 1px solid #6f686a;
+          width: 18px;
+          height: 18px;
+          background: transparent;
+        }
+    
+        &::after {
+          content: '';
+          position: absolute;
+          display: inline-block;
+          left: -20px;
+          top: 4px;
+          border-radius: 50%;
+          width: 12px;
+          height: 12px;
+          background: $muted-red;
+        }
+
+        &:checked {
+            + label::after {
+              background: $muted-red;
+            }
+          }
+        }
+
+        &:focus {
+            + label::before {
+              box-shadow: 0 0px 8px $muted-red;
+            }
+          }
+        }
+    }
 }
 
 
+/***** Feedback Page *****/
+.answer {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 0.7em;
+    padding: 0.35em;
+    background-color: #FCF300;
+}
+
+
+/***** Results Page *****/
+.snowboarder {
+    width: 200px;
+    height: 100px;
+    /* position: absolute;
+    right: 8%; */
+}
+
+.final-score {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.snowboard {
+    width: 250px;
+    height: 50px;
+}
+
+.results-message {
+    margin-top: 1em;
+}
 
 
 /***** Groups & Items  (Desktop) *****/
 
 /* When a web browser is larger than 600px,
    apply these rules */
-   /* @media all and (min-width: 600px) {
+@media all and (min-width: 700px) {
+    header h1 {
+        font-size: 2.25rem;
+    }
 
-   } */
+    .header-test {
+        font-size: 1.5rem;
+    }
+}
